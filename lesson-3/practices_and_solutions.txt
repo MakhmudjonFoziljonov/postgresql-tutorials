@@ -1,0 +1,106 @@
+JOIN Practice Questions
+1-question
+Join the weather and cities tables using INNER JOIN and return:
+
+wt.city
+wt.temp_hi
+ct.location
+
+Requirements:
+use table aliases
+join weather.city = cities.name
+
+2-question
+Join the weather and cities tables using LEFT OUTER JOIN and return:
+
+wt.city
+wt.date
+ct.location
+
+Requirements:
+join weather.city = cities.name
+
+3-question
+Join the weather and cities tables and return:
+
+wt.city
+wt.temp_lo
+wt.temp_hi
+ct.location
+
+Requirements:
+join weather.city = cities.name
+return only rows where wt.temp_hi > 20
+
+4-question
+Join the weather and cities tables using LEFT OUTER JOIN and return:
+
+wt.city
+wt.temp_lo
+wt.temp_hi
+ct.location
+(wt.temp_hi - wt.temp_lo) as temp_range
+
+Requirements:
+join weather.city = cities.name
+return only rows where wt.prcp > 0.00
+sort by temp_range in DESC order
+
+5-question
+Join the weather and cities tables using LEFT OUTER JOIN and return:
+
+wt.city
+wt.date
+wt.temp_lo
+wt.temp_hi
+ct.location
+(wt.temp_hi + wt.temp_lo) / 2 as temp_avg
+
+Requirements:
+join weather.city = cities.name
+return only rows where wt.prcp > 0.00 and wt.temp_hi > 30
+sort first by wt.city in ASC order, then by wt.date in DESC order
+
+------------- Before checking your answers, you must solve these problems. -------------
+
+
+
+
+
+JOIN Solutions
+
+1-solution
+
+SELECT wt.city, wt.temp_hi, ct.location
+FROM weather AS wt
+INNER JOIN cities AS ct ON wt.city = ct.name;
+
+2-solution
+
+SELECT wt.city, wt.date, ct.location
+FROM weather AS wt
+LEFT OUTER JOIN cities AS ct ON wt.city = ct.name;
+
+3-solution
+
+SELECT wt.city, wt.temp_lo, wt.temp_hi, ct.location
+FROM weather AS wt
+JOIN cities AS ct ON wt.city = ct.name
+WHERE wt.temp_hi > 20;
+
+4-solution
+
+SELECT wt.city, wt.temp_lo, wt.temp_hi, ct.location, (wt.temp_hi - wt.temp_lo) AS temp_range
+FROM weather AS wt
+LEFT OUTER JOIN cities AS ct ON wt.city = ct.name
+WHERE wt.prcp > 0.00
+ORDER BY temp_range DESC;
+
+5-solution
+
+SELECT wt.city, wt.date, wt.temp_lo, wt.temp_hi, ct.location, (wt.temp_hi + wt.temp_lo) / 2 AS temp_avg
+FROM weather AS wt
+LEFT OUTER JOIN cities AS ct ON wt.city = ct.name
+WHERE wt.prcp > 0.00
+AND wt.temp_hi > 30
+ORDER BY wt.city ASC, wt.date DESC;
