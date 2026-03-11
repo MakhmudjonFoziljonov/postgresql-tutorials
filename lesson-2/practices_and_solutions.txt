@@ -1,0 +1,54 @@
+***** Practice Questions *****
+
+1-question
+Return all data from the weather table, but only for rows where:
+
+city = 'Tashkent'
+prcp > 0.00
+
+2-question
+Return only the city names from the weather table, but remove duplicates and sort the result by city.
+
+3-question
+Return the following from the weather table:
+
+city
+temp_lo
+temp_hi
+(temp_lo + temp_hi) / 2 as temp_avg
+
+4-question
+Return the following columns from the weather table:
+
+city
+temp_hi
+date
+
+Sort the result by:
+city in DESC order
+date in ASC order
+------------- Before checking your answers, you must solve these problems. -------------
+
+
+
+
+***** Solutions *****
+
+1-solution
+SELECT *
+FROM weather
+WHERE city = 'Tashkent' AND prcp > 0.00;
+
+2-solution
+SELECT DISTINCT city
+FROM weather
+ORDER BY city;
+
+3-solution
+SELECT city, temp_lo, temp_hi, (temp_lo + temp_hi) / 2 AS temp_avg
+FROM weather;
+
+4-solution
+SELECT city, temp_hi, date
+FROM weather
+ORDER BY city DESC, date ASC;
