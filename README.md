@@ -4,3 +4,4 @@ This repository contains the exercises and SQL examples I practiced while learni
 - lesson-2: querying a table
 - lesson-3: joins
 - lesson-4: aggregate functions
+- lesson-5: practice

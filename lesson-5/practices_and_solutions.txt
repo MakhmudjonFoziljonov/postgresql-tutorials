@@ -44,3 +44,82 @@ INSERT INTO sales (product_name, category, price, quantity, sale_date) VALUES
 *** Questions ***
 
 Write a query to find how many orders each customer has.
+Write a query to find the total amount for each customer.
+Write a query to find the average amount for each customer.
+Write a query to find the maximum amount for each customer.
+Write a query to find how many orders were made in each city.
+Write a query to find the total amount for each city.
+Show only the customers whose number of orders is greater than 1.
+Show only the customers whose total order amount is greater than 500.
+Show only the customers whose average order amount is greater than 200.
+Write a query to find how many orders were made on each order date.
+Write a query to find how many orders were made by customers from Tashkent.
+
+
+
+------------- Before checking your answers, you must solve these problems. -------------
+
+SELECT c.name, COUNT(o.id) AS total_orders
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name;
+
+SELECT c.name, SUM(o.amount) AS total_amount
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name;
+
+SELECT c.name, AVG(o.amount) AS average_amount
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name;
+
+SELECT c.name, MAX(o.amount) AS max_amount
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name;
+
+
+SELECT c.city, COUNT(o.id) AS total_orders
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.city;
+
+SELECT city, SUM(o.amount) AS total_amount
+FROM customers
+LEFT JOIN orders o ON o.customer_id = customers.id
+GROUP BY city;
+
+SELECT c.name, COUNT(o.id) AS total_orders
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name
+HAVING COUNT(o.id) > 1;
+
+SELECT c.name, SUM(o.amount) AS total_amount
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name
+HAVING SUM(o.amount) > 500;
+
+SELECT c.name, AVG(o.amount) AS average_amount
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name
+HAVING AVG(o.amount) > 200;
+
+SELECT c.name, SUM(o.amount) AS total_amount
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id, c.name
+ORDER BY total_amount DESC
+LIMIT 1;
+
+SELECT o.order_date, COUNT(*) AS order_count
+FROM orders o
+GROUP BY o.order_date;
+
+SELECT COUNT(o.id) AS order_number
+FROM orders o
+LEFT JOIN customers c ON o.customer_id = c.id
+WHERE c.city = 'Tashkent';
